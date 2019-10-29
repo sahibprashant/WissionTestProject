@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Wission Test Project</string>
+    <string name="listActivityName">Items List</string>
+    <string name="editActivityName">Add Item</string>
+    <string name="enterItemName">Enter item name</string>
+    <string name="addItem">Add Item</string>
+</resources>
