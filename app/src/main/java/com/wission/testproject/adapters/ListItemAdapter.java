@@ -7,16 +7,28 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.wission.testproject.R;
+import com.wission.testproject.db.Entities.Items;
+import com.wission.testproject.interfaces.Callback;
+
+import java.util.List;
 
 public class ListItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private LayoutInflater inflater;
+    private Callback callback;
+    private List<Items> itemsList;
 
     public ListItemAdapter(Context context) {
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+
+    public void setData(List<Items> itemsList){
+        this.itemsList = itemsList;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -27,19 +39,39 @@ public class ListItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder vHolder, int position) {
+        if (itemsList != null) {
+            ListItemHolder holder = (ListItemHolder) vHolder;
+            String name = (position + 1) + ". " + itemsList.get(position).getItemName();
+            holder.itemName.setText(name);
+            holder.mainLayout.setOnClickListener(v -> {
+                callback.callBack(itemsList.get(position).getItemName());
+            });
+        }else{
+            //data is not ready yet.
+        }
     }
 
     @Override
     public int getItemCount() {
-        return 15;
+        if(itemsList!=null){
+            return itemsList.size();
+        }else{
+            return 0;
+        }
+    }
+
+    public void setCallback(Callback callback) {
+        this.callback = callback;
     }
 
     private class ListItemHolder extends RecyclerView.ViewHolder {
+
         TextView itemName;
+        ConstraintLayout mainLayout;
         ListItemHolder(View view) {
             super(view);
+            mainLayout = view.findViewById(R.id.mainLayout);
             itemName = view.findViewById(R.id.itemName);
         }
     }

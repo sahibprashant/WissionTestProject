@@ -7,18 +7,17 @@ import android.view.View;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.wission.testproject.R;
 import com.wission.testproject.adapters.ListItemAdapter;
+import com.wission.testproject.interfaces.Callback;
+import com.wission.testproject.viewModels.ItemsListViewModel;
 
-public class BaseActivity extends AppCompatActivity implements View.OnClickListener{
-
-    private RecyclerView recyclerView;
-    private ListItemAdapter adapter;
-    private FloatingActionButton fab;
+public class BaseActivity extends AppCompatActivity implements View.OnClickListener, Callback {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,21 +27,28 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void init() {
+
         Toolbar toolbar = findViewById(R.id.toolbar);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        FloatingActionButton fab = findViewById(R.id.fab);
+
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setTitle(getResources().getString(R.string.listActivityName));
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
 
-        fab = findViewById(R.id.fab);
-
-        recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ListItemAdapter(this);
+        final ListItemAdapter adapter = new ListItemAdapter(this);
+        adapter.setCallback(this);
         recyclerView.setAdapter(adapter);
 
         fab.setOnClickListener(this);
+
+        //initialise the view model and observe the data change
+        ItemsListViewModel viewModel = ViewModelProviders.of(this).get(ItemsListViewModel.class);
+        viewModel.getItemsList().observe(this, adapter::setData);
+
     }
 
     @Override
@@ -51,5 +57,14 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
             //start add item activity
             startActivity(new Intent(BaseActivity.this, AddItemActivity.class));
         }
+    }
+
+    @Override
+    public void callBack(String str) {
+        //called on selecting an item from list
+        Intent intent = new Intent(BaseActivity.this, AddItemActivity.class);
+        intent.putExtra("type", "readOnly");
+        intent.putExtra("itemName", str);
+        startActivity(intent);
     }
 }

@@ -4,4 +4,7 @@
     <string name="editActivityName">Add Item</string>
     <string name="enterItemName">Enter item name</string>
     <string name="addItem">Add Item</string>
+    <string name="dbName">wission_project_db</string>
+    <string name="empty_field">Please enter data to save.</string>
+    <string name="saved_successfully">Item added successfully.</string>
 </resources>
