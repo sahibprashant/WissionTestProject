@@ -5,15 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.wission.testproject.R;
-import com.wission.testproject.db.Entities.Items;
+import com.wission.testproject.models.Items;
 import com.wission.testproject.interfaces.Callback;
-
 import java.util.List;
 
 public class ListItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -42,13 +39,9 @@ public class ListItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder vHolder, int position) {
         if (itemsList != null) {
             ListItemHolder holder = (ListItemHolder) vHolder;
-            String name = (position + 1) + ". " + itemsList.get(position).getItemName();
+            String name = itemsList.get(position).getItemKey() + " : " + itemsList.get(position).getItemName();
             holder.itemName.setText(name);
-            holder.mainLayout.setOnClickListener(v -> {
-                callback.callBack(itemsList.get(position).getItemName());
-            });
-        }else{
-            //data is not ready yet.
+            holder.mainLayout.setOnClickListener(v -> callback.callBack(itemsList.get(position).getItemKey(),itemsList.get(position).getItemName()));
         }
     }
 

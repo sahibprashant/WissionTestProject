@@ -1,11 +1,11 @@
-package com.wission.testproject.db.DAOs;
+package com.wission.testproject.db;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.wission.testproject.db.Entities.Items;
+import com.wission.testproject.models.Items;
 
 import java.util.List;
 
@@ -17,5 +17,8 @@ public interface ItemDao {
 
     @Query("SELECT * FROM items_table ORDER BY id DESC")
     LiveData<List<Items>> getAllItems();
+
+    @Query("DELETE FROM items_table")
+    void deleteAll();
 
 }

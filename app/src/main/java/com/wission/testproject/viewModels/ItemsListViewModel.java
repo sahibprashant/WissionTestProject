@@ -4,7 +4,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import com.wission.testproject.db.Entities.Items;
+import com.wission.testproject.models.Items;
 import com.wission.testproject.repo.ItemsListRepository;
 import java.util.List;
 
@@ -19,10 +19,13 @@ public class ItemsListViewModel extends AndroidViewModel {
         itemsList = repository.getItemsList();
     }
 
-    public void insert(Items item){
-        repository.insert(item);
-    }
-
     public LiveData<List<Items>> getItemsList(){return itemsList;}
 
+    public void requestData(){repository.requestItems();}
+
+
+    public void insertData(String key, String value) {
+
+        repository.pushData(key, value);
+    }
 }

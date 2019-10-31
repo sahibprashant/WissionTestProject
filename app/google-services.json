@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "695993604805",
+    "firebase_url": "https://testfirebase-cfa3a.firebaseio.com",
+    "project_id": "testfirebase-cfa3a",
+    "storage_bucket": "testfirebase-cfa3a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:695993604805:android:32717acd49e30885972eac",
+        "android_client_info": {
+          "package_name": "com.wission.testproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "695993604805-0e4hlhvd90d0s03cducajg2drue8kl19.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAZqiDPXhzwnV1tjAg29p0uppNFkM6thc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "695993604805-0e4hlhvd90d0s03cducajg2drue8kl19.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

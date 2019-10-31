@@ -2,9 +2,11 @@
     <string name="app_name">Wission Test Project</string>
     <string name="listActivityName">Items List</string>
     <string name="editActivityName">Add Item</string>
-    <string name="enterItemName">Enter item name</string>
+    <string name="enterItemName">Enter item value</string>
+    <string name="enterItemKey">Enter item key</string>
     <string name="addItem">Add Item</string>
     <string name="dbName">wission_project_db</string>
     <string name="empty_field">Please enter data to save.</string>
     <string name="saved_successfully">Item added successfully.</string>
+    <string name="error_occurred">Something went wrong.</string>
 </resources>

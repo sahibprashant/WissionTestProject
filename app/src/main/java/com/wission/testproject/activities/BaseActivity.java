@@ -48,7 +48,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         //initialise the view model and observe the data change
         ItemsListViewModel viewModel = ViewModelProviders.of(this).get(ItemsListViewModel.class);
         viewModel.getItemsList().observe(this, adapter::setData);
-
+        new Thread(viewModel::requestData).start();
     }
 
     @Override
@@ -60,11 +60,12 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void callBack(String str) {
+    public void callBack(String key, String val) {
         //called on selecting an item from list
         Intent intent = new Intent(BaseActivity.this, AddItemActivity.class);
         intent.putExtra("type", "readOnly");
-        intent.putExtra("itemName", str);
+        intent.putExtra("itemName", val);
+        intent.putExtra("itemKey", key);
         startActivity(intent);
     }
 }

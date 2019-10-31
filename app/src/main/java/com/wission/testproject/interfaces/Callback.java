@@ -1,5 +1,5 @@
 package com.wission.testproject.interfaces;
 
 public interface Callback {
-    void callBack(String str);
+    void callBack(String key, String val);
 }

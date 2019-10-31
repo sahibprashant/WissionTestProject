@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.wission.testproject.R;
-import com.wission.testproject.db.Entities.Items;
 import com.wission.testproject.viewModels.ItemsListViewModel;
 
 import java.util.Objects;
@@ -19,7 +18,7 @@ import java.util.Objects;
 
 public class AddItemActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText editText;
+    private EditText key, value;
     private Button button;
     private ItemsListViewModel viewModel;
 
@@ -31,17 +30,19 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void init() {
-        editText = findViewById(R.id.editText);
+        key = findViewById(R.id.key);
+        value = findViewById(R.id.val);
         button = findViewById(R.id.button);
 
         //if activity is opened to view item
         if(getIntent().getExtras()!=null  &&
                 Objects.requireNonNull(getIntent().getStringExtra("type")).equalsIgnoreCase("readOnly")){
-            String itemName = getIntent().getStringExtra("itemName");
 
             button.setVisibility(View.GONE);
-            editText.setText(itemName);
-            editText.setEnabled(false);
+            key.setText(getIntent().getStringExtra("itemKey"));
+            value.setText(getIntent().getStringExtra("itemName"));
+            key.setEnabled(false);
+            value.setEnabled(false);
             return;
         }
 
@@ -53,13 +54,13 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.button){
-            String val = editText.getText().toString().trim();
-            if (val.equalsIgnoreCase("")){
+            String val = value.getText().toString().trim();
+            String keyName = key.getText().toString().trim();
+            if (val.equalsIgnoreCase("") || keyName.equalsIgnoreCase("")){
                 Toast.makeText(this, getResources().getString(R.string.empty_field), Toast.LENGTH_SHORT).show();
             }else{
                 //inserting the data
-                viewModel.insert(new Items(null,val));
-                Toast.makeText(this, getResources().getString(R.string.saved_successfully), Toast.LENGTH_SHORT).show();
+                new Thread(() -> viewModel.insertData(keyName, val)).start();
                 button.setEnabled(false);
             }
         }

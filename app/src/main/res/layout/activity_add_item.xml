@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/key"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/primaryTextColor"
@@ -17,9 +17,26 @@
         app:layout_constraintVertical_bias="0.15"
         android:layout_marginRight="@dimen/_15sdp"
         android:layout_marginLeft="@dimen/_15sdp"
-        android:hint="@string/enterItemName"
+        android:hint="@string/enterItemKey"
         android:textAlignment="center"
        />
+
+    <EditText
+        android:id="@+id/val"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="@dimen/_14sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.25"
+        android:layout_marginRight="@dimen/_15sdp"
+        android:layout_marginLeft="@dimen/_15sdp"
+        android:hint="@string/enterItemName"
+        android:textAlignment="center"
+        />
 
     <Button
         android:id="@+id/button"
@@ -29,7 +46,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.30"
+        app:layout_constraintVertical_bias="0.40"
         android:layout_marginRight="@dimen/_15sdp"
         android:layout_marginLeft="@dimen/_15sdp"
         android:text="@string/addItem"

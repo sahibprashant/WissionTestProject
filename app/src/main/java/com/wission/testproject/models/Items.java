@@ -1,4 +1,4 @@
-package com.wission.testproject.db.Entities;
+package com.wission.testproject.models;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
@@ -16,9 +16,14 @@ public class Items {
     @ColumnInfo(name = "id")
     private Long id;
 
-    public Items(Long id, @NonNull String itemName) {
-        this.itemName = itemName;
+    @NonNull
+    @ColumnInfo(name = "itemKey")
+    private String itemKey;
+
+    public Items(Long id, @NonNull String itemKey, @NonNull String itemName) {
         this.id = id;
+        this.itemKey = itemKey;
+        this.itemName = itemName;
     }
 
     @NonNull
@@ -29,4 +34,8 @@ public class Items {
     @NonNull
     public Long getId(){return id;}
 
+    @NonNull
+    public String getItemKey() {
+        return itemKey;
+    }
 }

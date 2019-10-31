@@ -6,10 +6,9 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.wission.testproject.R;
-import com.wission.testproject.db.DAOs.ItemDao;
-import com.wission.testproject.db.Entities.Items;
+import com.wission.testproject.models.Items;
 
-@Database(entities = {Items.class}, version = 3, exportSchema = false)
+@Database(entities = {Items.class}, version = 1, exportSchema = false)
 public abstract class ItemsRoomDatabase extends RoomDatabase {
 
     private static ItemsRoomDatabase databaseInstance;
