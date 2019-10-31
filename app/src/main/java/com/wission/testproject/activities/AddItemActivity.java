@@ -5,16 +5,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
-
 import com.wission.testproject.R;
 import com.wission.testproject.viewModels.ItemsListViewModel;
-
 import java.util.Objects;
-
 
 public class AddItemActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -30,6 +26,7 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void init() {
+
         key = findViewById(R.id.key);
         value = findViewById(R.id.val);
         button = findViewById(R.id.button);
@@ -61,6 +58,7 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
             }else{
                 //inserting the data
                 new Thread(() -> viewModel.insertData(keyName, val)).start();
+                Toast.makeText(AddItemActivity.this, getResources().getString(R.string.saved_successfully), Toast.LENGTH_SHORT).show();
                 button.setEnabled(false);
             }
         }

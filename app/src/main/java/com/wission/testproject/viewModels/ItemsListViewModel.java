@@ -25,7 +25,7 @@ public class ItemsListViewModel extends AndroidViewModel {
 
 
     public void insertData(String key, String value) {
-
         repository.pushData(key, value);
     }
+
 }
